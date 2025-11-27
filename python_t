@@ -1,0 +1,33 @@
+# -*- coding: utf-8 -*-
+import numpy as np
+import matplotlib.pyplot as plt
+
+# パラメータ
+A = 1.0          # 振幅
+f = 5.0          # 周波数 [Hz]
+phi = 0.0        # 位相 [rad]
+fs = 1000        # サンプリング周波数 [Hz]
+duration = 1.0   # 生成時間 [s]
+
+# 時間軸生成
+t = np.arange(0, duration, 1.0/fs)
+
+# 正弦波生成: y = A * sin(2π f t + φ)
+y = A * np.sin(2 * np.pi * f * t + phi)
+
+# 1) 標準出力に一部サンプル値を出力
+print("time[s], value")
+for i in range(0, len(t), len(t)//10 or 1):  # 10点ほど抜粋
+    print(f"{t[i]:.6f}, {y[i]:.6f}")
+
+# 2) グラフ表示
+plt.figure(figsize=(8, 3))
+plt.plot(t, y, label=f"{f} Hz sine")
+plt.xlabel("Time [s]")
+plt.ylabel("Amplitude")
+plt.title("Sine wave")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
